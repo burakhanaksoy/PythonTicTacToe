@@ -1,5 +1,7 @@
 from random import randint
 board_count = 0
+win = False
+
 board = ['-', '-', '-',
          '-', '-', '-',
          '-', '-', '-']
@@ -9,13 +11,6 @@ def display_board():
     print(board[0] + '|' + board[1] + '|' + board[2])
     print(board[3] + '|' + board[4] + '|' + board[5])
     print(board[6] + '|' + board[7] + '|' + board[8])
-
-
-def play_game():
-    global board_count
-    display_board()
-    while board_count < 9:
-        handle_turn()
 
 
 def handle_turn():
@@ -42,6 +37,8 @@ def handle_turn():
 
 
 def winner_checker(*args):
+    global win
+
     winning_positions_x = ['X', 'X', 'X']
     winning_positions_o = ['O', 'O', 'O']
     row_1 = board[0] == board[1] == board[2] != '-'
@@ -58,43 +55,67 @@ def winner_checker(*args):
     if row_1:
         if board[0] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif row_2:
         if board[3] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif row_3:
         if board[6] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif colum_1:
         if board[0] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif colum_2:
         if board[1] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif colum_3:
         if board[2] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif diagonal_1:
         if board[0] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
     elif diagonal_2:
         if board[6] == 'X':
             print('User wins')
+            win = True
         else:
             print('CPU wins')
+            win = True
+
+
+def play_game():
+    global board_count
+    display_board()
+    while board_count < 9 and win == False:
+        handle_turn()
+    print("Game finished")
 
 
 play_game()
